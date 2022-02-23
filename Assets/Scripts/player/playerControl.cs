@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+
 
 public class playerControl : MonoBehaviour
 {
@@ -33,6 +35,7 @@ public class playerControl : MonoBehaviour
             if (allowJump || body.velocity.y == 0)
             {
                 body.AddForce(new Vector3(0, jumpHeight, 0), ForceMode2D.Impulse);
+                Debug.Log(PhotonNetwork.NickName);
                 allowJump = false;
             }
         }

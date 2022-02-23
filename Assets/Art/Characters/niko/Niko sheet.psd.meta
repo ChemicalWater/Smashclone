@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -76,9 +76,1041 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Niko sheet_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 219
+        width: 13
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e79b358707868f46ab8fc5649465678
+      internalID: -1872411795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 221
+        width: 14
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d5abc91a586e524190e68aeb526fcb3
+      internalID: 1608674855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 223
+        width: 14
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51a4ce3480f343c42b323f3a6c9ff137
+      internalID: 4078029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_3
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 222
+        width: 13
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 569e8c54cc62c684b9f8507dc760057d
+      internalID: -981776618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_4
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 219
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 468f67c9ccfc9264d928d210c0d2dcee
+      internalID: 645298605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_5
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 219
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ef948ab77dda864398de4d4ecd9a3e5
+      internalID: 749708327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_6
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 222
+        width: 13
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e631068d91b721a47bb02a408f88c767
+      internalID: 801197852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_7
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 223
+        width: 14
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 244e00c2d0904184a97403627993e7af
+      internalID: 625293482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_8
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 221
+        width: 14
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7581603569412445b3fd5f4ea97a084
+      internalID: 651500747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_9
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 219
+        width: 13
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b12723baa355ed4d983456ae3230b6e
+      internalID: -68877017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_10
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 182
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3a36e6371ca77044bcae8373f597f11
+      internalID: -1908572218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_11
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 182
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a60ad014b8447284b8f3dd7daccd61f6
+      internalID: -1721505140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_12
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 182
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8cda7475e9e95cf4faa53329ef921416
+      internalID: 554971171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_13
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 182
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14513d1647dd8a94f920a48c387a7f19
+      internalID: 757544625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_14
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 182
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a269ad46b06c83947a44771520efb65a
+      internalID: 554333064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_15
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 182
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a33f5acf843b84e4585b43b326b6a8bc
+      internalID: 681091689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_16
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 182
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07676337d3e2b7944a1822e129218174
+      internalID: 2129786043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_17
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 182
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8fadfef474dbfe4fb2b49c3702d2faa
+      internalID: -959926557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_18
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 144
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0d1cb35eb7e53142ba0b2178a36af14
+      internalID: -233465619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_19
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 144
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54cf4f7244eb1d0429f2e4324e8deefa
+      internalID: 2093432339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_20
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 144
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b8ad2838129c054c94f0a194b293cef
+      internalID: 2135694381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_21
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 144
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fef1545fd9d07ab4eb25fe7f44604fd9
+      internalID: 801913852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_22
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 144
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a837a10cd60e3754ba884301b93695f6
+      internalID: 1338812531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_23
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 144
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6459f5c7ca3ca6341ac7529874448a37
+      internalID: 1959842712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_24
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 144
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b38b70a28b1b9b46a6e708b15fccbdb
+      internalID: -1019484627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_25
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 144
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba0cff15c5ab2b0409387546800dd6c1
+      internalID: 1112139411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_26
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 104
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8afcd927a2856794dbf280c927040178
+      internalID: -2145878487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_27
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 104
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 940d38af9a5096942b768f7892451648
+      internalID: 698728431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_28
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 104
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f68cd54347db5248be5216f67363b36
+      internalID: -2091232165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_29
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 104
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4b1ea105a6ed64459fb43d0265287e4
+      internalID: -1221481512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_30
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 104
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f39d05853aae00e419b28de127070847
+      internalID: -1617393729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_31
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 104
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc8401f3abd209341b550b1c40ace210
+      internalID: 871594180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_32
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 68
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44b9453bf4cbb3a46b141e0abc86ea07
+      internalID: 223147390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_33
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 68
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8210a8235e05274da3cf75a208932cf
+      internalID: -1792360689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_34
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 68
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 115e82ca24316884fbdc13958a674dd1
+      internalID: -869364460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_35
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 68
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bebaed8b59354a42b598f2b861767c2
+      internalID: 310025381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_36
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 68
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d799c26e08f887840802d04445238ecb
+      internalID: -791047403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_37
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 68
+        width: 19
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3b448faa8ee1fb41911481604ba34b7
+      internalID: 982186121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_38
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 68
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 007674e37c383684abbdd521fb85e62b
+      internalID: -274479470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_39
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 68
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf932fcf174e55141afbb3ab3f416ca1
+      internalID: -867066709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_40
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 29
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10dc59b8daa393c42a59c8d18c76a094
+      internalID: -1891295022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_41
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 29
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fea06551e8421a240904f3732e7b0309
+      internalID: -1423364889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_42
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 29
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11f58433eecdfb44e9151db8a2be477b
+      internalID: -516382753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_43
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 29
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4bdc0bb05825db4bb18a437309b300c
+      internalID: 650503051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_44
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 29
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c400aead4a6b89408ca3bb8a03fac35
+      internalID: -2029170896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_45
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 29
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c65276451f8bf8141901005aa44c11e0
+      internalID: -1406620526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_46
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 29
+        width: 13
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 573143183c3c10e4e8d782698d0ac1fe
+      internalID: 127446636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Niko sheet_47
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 29
+        width: 16
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c6e98f211c8c5343a4ef08a6f580b47
+      internalID: -1025553402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -89,7 +1121,55 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Niko sheet_12: 554971171
+      Niko sheet_39: -867066709
+      Niko sheet_7: 625293482
+      Niko sheet_23: 1959842712
+      Niko sheet_3: -981776618
+      Niko sheet_5: 749708327
+      Niko sheet_18: -233465619
+      Niko sheet_19: 2093432339
+      Niko sheet_0: -1872411795
+      Niko sheet_43: 650503051
+      Niko sheet_35: 310025381
+      Niko sheet_40: -1891295022
+      Niko sheet_44: -2029170896
+      Niko sheet_38: -274479470
+      Niko sheet_32: 223147390
+      Niko sheet_14: 554333064
+      Niko sheet_29: -1221481512
+      Niko sheet_2: 4078029
+      Niko sheet_1: 1608674855
+      Niko sheet_10: -1908572218
+      Niko sheet_24: -1019484627
+      Niko sheet_37: 982186121
+      Niko sheet_13: 757544625
+      Niko sheet_25: 1112139411
+      Niko sheet_27: 698728431
+      Niko sheet_26: -2145878487
+      Niko sheet_20: 2135694381
+      Niko sheet_41: -1423364889
+      Niko sheet_30: -1617393729
+      Niko sheet_4: 645298605
+      Niko sheet_22: 1338812531
+      Niko sheet_6: 801197852
+      Niko sheet_17: -959926557
+      Niko sheet_21: 801913852
+      Niko sheet_42: -516382753
+      Niko sheet_8: 651500747
+      Niko sheet_11: -1721505140
+      Niko sheet_45: -1406620526
+      Niko sheet_33: -1792360689
+      Niko sheet_9: -68877017
+      Niko sheet_46: 127446636
+      Niko sheet_31: 871594180
+      Niko sheet_28: -2091232165
+      Niko sheet_16: 2129786043
+      Niko sheet_15: 681091689
+      Niko sheet_34: -869364460
+      Niko sheet_47: -1025553402
+      Niko sheet_36: -791047403
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 1
