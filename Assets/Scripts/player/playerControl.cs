@@ -47,15 +47,15 @@ public class playerControl : MonoBehaviourPun, IPunObservable
         body = GetComponent<Rigidbody2D>();
         animPlayer = GetComponent<Animator>();
 
-        if (PlayerUiPrefab != null)
-        {
-            GameObject UI = Instantiate(PlayerUiPrefab);
-            UI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
-        }
-        else
-        {
-            Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
-        }
+       // if (PlayerUiPrefab != null)
+       // {
+       //    GameObject UI = Instantiate(PlayerUiPrefab);
+       //     UI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+       // }
+       // else
+       // {
+       //     Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+       // }
 
     }
 
@@ -133,7 +133,15 @@ public class playerControl : MonoBehaviourPun, IPunObservable
         if (photonView.IsMine)
         {
             health -= remHealth;
-            body.AddForce(new Vector2(health, 0), ForceMode2D.Impulse);
+            body.AddForce(new Vector2(((1 - health) * (10)) , 0), ForceMode2D.Impulse);
+        }
+    }
+
+    public void addHealth(float addHealth)
+    {
+        if (photonView.IsMine)
+        {
+            health += addHealth;
         }
     }
 
@@ -214,7 +222,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && Input.GetKey(KeyCode.Space))
+        if (other.tag == "Player" && Input.GetKey(KeyCode.Space) && other != null)
             other.GetComponent<playerControl>().takeHealth(0.1f);
         if (other.tag == "platforms" && transform.position.y > other.transform.position.y)
         {

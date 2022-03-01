@@ -20,6 +20,8 @@ namespace smashclone
         public GameObject playerPrefab;
         [Tooltip("The prefab to use spawning items")]
         public GameObject itemSpawner;
+        private GameObject itemSpawnClone;
+
 
         void Start()
         {
@@ -34,6 +36,10 @@ namespace smashclone
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+                    if (itemSpawnClone == null)
+                    {
+                        spawnItems();
+                    }
                 }
                 else
                 {
@@ -42,7 +48,6 @@ namespace smashclone
             }
         }
         #region Private Methods
-
 
         void LoadArena()
         {
@@ -55,9 +60,12 @@ namespace smashclone
             PhotonNetwork.LoadLevel("scene_lior");
         }
 
-        void spawnItems()
+        public void spawnItems()
         {
-            PhotonNetwork.Instantiate(this.itemSpawner.name, new Vector3(-0.1138714f, -0.7103133f, 0f), Quaternion.identity, 0);
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+            {
+                itemSpawnClone = PhotonNetwork.Instantiate(this.itemSpawner.name, new Vector3(-0.1138714f, -0.7103133f, 0f), Quaternion.identity, 0);
+            }
         }
 
         #endregion
@@ -90,6 +98,12 @@ namespace smashclone
 
                 LoadArena();
             }
+            GameObject[] ItemSpawning = GameObject.FindGameObjectsWithTag("Items");
+            foreach(GameObject item in ItemSpawning)
+            {
+                Destroy(item);
+            }
+
         }
 
 
