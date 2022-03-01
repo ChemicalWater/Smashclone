@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using TMPro;
+using UnityEngine.UI;
 
 
-public class playerControl : MonoBehaviour
+public class playerControl : MonoBehaviourPun, IPunObservable
 {
     private Rigidbody2D body;
     private float vertical;
@@ -18,37 +20,121 @@ public class playerControl : MonoBehaviour
     private bool punching;
     private bool facingRight = true;
     private bool usingItem = false;
+    public float health = 1f;
+
+    [Tooltip("The Player's UI GameObject Prefab")]
+    [SerializeField]
+    public GameObject PlayerUiPrefab;
+
+    [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
+    public static GameObject LocalPlayerInstance;
+
+    void Awake()
+    {
+        // #Important
+        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
+        if (photonView.IsMine)
+        {
+            playerControl.LocalPlayerInstance = this.gameObject;
+        }
+        // #Critical
+        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         animPlayer = GetComponent<Animator>();
+
+        if (PlayerUiPrefab != null)
+        {
+            GameObject UI = Instantiate(PlayerUiPrefab);
+            UI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+        }
+        else
+        {
+            Debug.LogWarning("<Color=Red><a>Missing</a></Color> PlayerUiPrefab reference on player Prefab.", this);
+        }
+
     }
+
+    void Update()
+    {
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true)
+        {
+            return;
+        }
+    }
+
+    #region IPunObservable implementation
+
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            stream.SendNext(punching);
+            stream.SendNext(usingItem);
+            stream.SendNext(health);
+            stream.SendNext(body.velocity);
+        }
+        else
+        {
+            // Network player, receive data
+            this.punching = (bool)stream.ReceiveNext();
+            this.usingItem = (bool)stream.ReceiveNext();
+            this.health = (float)stream.ReceiveNext();
+            this.body.velocity = (Vector2)stream.ReceiveNext();
+        }
+    }
+
+
+    #endregion
 
     void FixedUpdate()
     {
-        vertical = Input.GetAxisRaw("Vertical");
-        horizontal = Input.GetAxisRaw("Horizontal");
-        SetRigidBodyVelocity();
-        TriggerAnimations();
-
-        if (Input.GetKey(KeyCode.W))
+        if (photonView.IsMine)
         {
-            if (allowJump)
-            {
-                body.AddForce(new Vector3(0, jumpHeight, 0), ForceMode2D.Impulse);
-                allowJump = false;
-            }
-        }
-        if (Input.GetKey(KeyCode.Space))
-            punching = true;
-        else
-            punching = false;
+            vertical = Input.GetAxisRaw("Vertical");
+            horizontal = Input.GetAxisRaw("Horizontal");
+            SetRigidBodyVelocity();
+            TriggerAnimations();
 
-        if (Input.GetKey(KeyCode.F))
-            usingItem = true;
-        else
-            usingItem = false;
+            if (Input.GetKey(KeyCode.W))
+            {
+                if (allowJump)
+                {
+                    body.AddForce(new Vector3(0, jumpHeight, 0), ForceMode2D.Impulse);
+                    allowJump = false;
+                }
+            }
+            if (Input.GetKey(KeyCode.Space))
+                punching = true;
+            else
+                punching = false;
+
+            if (Input.GetKey(KeyCode.F))
+                usingItem = true;
+            else
+                usingItem = false;
+        }
+    }
+
+    void CalledOnLevelWasLoaded()
+    {
+        GameObject UI = Instantiate(this.PlayerUiPrefab);
+        UI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+    }
+
+    public void takeHealth(float remHealth)
+    {
+        if (photonView.IsMine)
+        {
+            health -= remHealth;
+            body.AddForce(new Vector2(health, 0), ForceMode2D.Impulse);
+        }
     }
 
     void TriggerAnimations()
@@ -128,6 +214,8 @@ public class playerControl : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.tag == "Player" && Input.GetKey(KeyCode.Space))
+            other.GetComponent<playerControl>().takeHealth(0.1f);
         if (other.tag == "platforms" && transform.position.y > other.transform.position.y)
         {
             allowJump = true;
