@@ -13,12 +13,14 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     private float horizontal;
     private Animator animPlayer;
     [SerializeField]
-    float maxSpd = 0.5f;
+    float maxSpd = 1f;
     [SerializeField]
-    float jumpHeight = 8f;
+    float jumpHeight = 4f;
     private bool allowJump = true;
     private bool punching;
-    private bool facingRight = true;
+    [Tooltip("The amount of force a Player's punch packs")]
+    [SerializeField] private float punchPower = 5f;
+    public bool facingRight = true;
     private bool usingItem = false;
     public float health = 1f;
 
@@ -83,7 +85,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
         else
         {
             // Network player, receive data
-            this.punching = (bool)stream.ReceiveNext();
+            this.transform.GetChild(0).gameObject.SetActive( (bool)stream.ReceiveNext() );
             this.usingItem = (bool)stream.ReceiveNext();
             this.health = (float)stream.ReceiveNext();
             this.body.velocity = (Vector2)stream.ReceiveNext();
@@ -110,31 +112,40 @@ public class playerControl : MonoBehaviourPun, IPunObservable
                     allowJump = false;
                 }
             }
+
             if (Input.GetKey(KeyCode.Space))
+            {
                 punching = true;
+                this.transform.GetChild(0).gameObject.SetActive(punching);
+            }
             else
+            {
                 punching = false;
+                this.transform.GetChild(0).gameObject.SetActive(punching);
+            }
 
             if (Input.GetKey(KeyCode.F))
                 usingItem = true;
             else
                 usingItem = false;
         }
+        if (this.health <= 0 && PhotonNetwork.IsConnected)
+            PhotonNetwork.Disconnect();
     }
 
     void CalledOnLevelWasLoaded()
     {
         GameObject UI = Instantiate(this.PlayerUiPrefab);
         UI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+
+        health = 1f;
     }
 
     public void takeHealth(float remHealth)
     {
-        if (photonView.IsMine)
-        {
+        Debug.Log(health + "" + PhotonNetwork.NickName);
             health -= remHealth;
-            body.AddForce(new Vector2(((1 - health) * (10)) , 0), ForceMode2D.Impulse);
-        }
+            body.AddRelativeForce(new Vector2(((1 - health) * (punchPower)), 0), ForceMode2D.Impulse);
     }
 
     public void addHealth(float addHealth)
@@ -202,28 +213,35 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     }
     void SetRigidBodyVelocity()
     {
-        float speed = Vector2.SqrMagnitude(body.velocity);
-        if (speed > maxSpd)
+        //float speed = Vector2.SqrMagnitude(body.velocity);
+        //if (speed > maxSpd)
+        //
+        //{
+        //    float brakeSpeed = speed - maxSpd;
+        //
+        //    Vector2 normalisedVelocity = body.velocity.normalized;
+        //    Vector2 brakeVelocity = normalisedVelocity * brakeSpeed;
+        //
+        //    body.AddForce(-brakeVelocity);
+        //}
+        //else
+        //{
+        //    Vector2 newVelocity = new Vector3(horizontal, 0);
+        //    body.velocity += newVelocity.normalized;
+        //}
 
-        {
-            float brakeSpeed = speed - maxSpd;
-
-            Vector2 normalisedVelocity = body.velocity.normalized;
-            Vector2 brakeVelocity = normalisedVelocity * brakeSpeed;
-
-            body.AddForce(-brakeVelocity);
-        }
-        else
-        {
-            Vector2 newVelocity = new Vector3(horizontal, 0);
-            body.velocity += newVelocity.normalized;
-        }
+        Vector2 xVel = body.velocity;
+        xVel.x = horizontal;
+        body.velocity = xVel * maxSpd;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && Input.GetKey(KeyCode.Space) && other != null)
-            other.GetComponent<playerControl>().takeHealth(0.1f);
+        if (other.tag == "Player" && other.GetComponent<playerControl>() != null)
+            takeHealth(0.1f);
+    }
+    void OnTriggerStay2D(Collider2D other)
+    {
         if (other.tag == "platforms" && transform.position.y > other.transform.position.y)
         {
             allowJump = true;

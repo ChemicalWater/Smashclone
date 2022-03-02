@@ -61,7 +61,7 @@ public class ItemSpawn : MonoBehaviour
         {
             items[randomItem].gameObject.SetActive(false);
             pickedUp = true;
-            other.GetComponent<playerInventory>().attachItem(items[randomItem].name);
+            //other.GetComponent<playerInventory>().attachItem(items[randomItem].name);
         }
     }
 }

@@ -147,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0072366446, y: -0.1450333}
+  m_Offset: {x: -0.0072366446, y: -0.14686798}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -158,7 +158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12884009, y: 0.01867783}
+  m_Size: {x: 0.12884009, y: 0.022347182}
   m_EdgeRadius: 0
 --- !u!61 &4261806458925745397
 BoxCollider2D:
@@ -173,7 +173,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.007236667, y: -0.1450333}
+  m_Offset: {x: -0.007236667, y: -0.14707181}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -184,7 +184,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12884013, y: 0.01867783}
+  m_Size: {x: 0.12884013, y: 0.022754863}
   m_EdgeRadius: 0
 --- !u!114 &3073775535737662282
 MonoBehaviour:
@@ -198,8 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9913e7b021902d148868c7e0ee1a52db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpd: 0.5
-  jumpHeight: 8
+  maxSpd: 1
+  jumpHeight: 4
+  punchPower: 5
+  facingRight: 1
   health: 1
   PlayerUiPrefab: {fileID: 7626613577240169525, guid: fc64c1cf2a8f8054bb769c9d52e4ff33, type: 3}
 --- !u!114 &-1109057601774297323
@@ -231,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
+  ShowParameterInspector: 0
   m_SynchronizeParameters:
   - Type: 4
     SynchronizeType: 1
@@ -275,7 +277,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 1
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
@@ -295,13 +297,14 @@ GameObject:
   m_Component:
   - component: {fileID: 7588487972650151011}
   - component: {fileID: 7588487972650151008}
+  - component: {fileID: 7669009788675237336}
   m_Layer: 8
   m_Name: player_collider
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7588487972650151011
 Transform:
   m_ObjectHideFlags: 0
@@ -333,3 +336,26 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0057403743, y: -0.0020986497}
   m_Size: {x: 0.14374655, y: 0.31860095}
   m_Direction: 0
+--- !u!114 &7669009788675237336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7588487972650151010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 0
+  ObservedComponents:
+  - {fileID: 0}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
