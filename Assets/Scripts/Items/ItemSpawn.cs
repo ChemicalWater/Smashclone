@@ -57,11 +57,11 @@ public class ItemSpawn : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && other.GetComponent<playerInventory>().Items.Count == 0)
         {
             items[randomItem].gameObject.SetActive(false);
             pickedUp = true;
-            //other.GetComponent<playerInventory>().attachItem(items[randomItem].name);
+            other.GetComponent<playerInventory>().attachItem(items[randomItem].name);
         }
     }
 }

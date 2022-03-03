@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class playerInventory : MonoBehaviour
 {
-    private string currentItem;
+    public ArrayList Items;
+
+    void Start()
+    {
+        Items = new ArrayList();
+    }
 
     public void attachItem (string itemName)
     {
-        currentItem = itemName;
+        Items.Add(itemName);
     }
 
-    public void useItem()
+    public void useItem(string itemName)
     {
+        switch (itemName) {
+            case "Item_Health":
+                this.GetComponent<playerControl>().addHealth(0.2f);
+                Items.Remove(itemName);
+                break;
 
+            default:
+                Debug.Log("Couldn't find item with name: " + itemName);
+                break;
+                }
     }
 }

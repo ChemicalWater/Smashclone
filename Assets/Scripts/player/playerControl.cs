@@ -117,6 +117,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
             {
                 punching = true;
                 this.transform.GetChild(0).gameObject.SetActive(punching);
+                Debug.Log(health);
             }
             else
             {
@@ -124,15 +125,26 @@ public class playerControl : MonoBehaviourPun, IPunObservable
                 this.transform.GetChild(0).gameObject.SetActive(punching);
             }
 
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKey(KeyCode.F) && this.GetComponent<playerInventory>().Items.Count == 0)
+            {
                 usingItem = true;
+                GetComponent<playerInventory>().useItem("Item_Health");
+            }
             else
                 usingItem = false;
         }
-        if (this.health <= 0 && PhotonNetwork.IsConnected)
-            PhotonNetwork.Disconnect();
+        if (this.health <= 0)
+            Dead();
     }
 
+    void Dead()
+    {
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+            health = 1f;
+        }
+    }
     void CalledOnLevelWasLoaded()
     {
         GameObject UI = Instantiate(this.PlayerUiPrefab);
@@ -145,15 +157,12 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     {
         Debug.Log(health + "" + PhotonNetwork.NickName);
             health -= remHealth;
-            body.AddRelativeForce(new Vector2(((1 - health) * (punchPower)), 0), ForceMode2D.Impulse);
+            //body.AddForce(new Vector2(((1 - health) * (punchPower)), 0), ForceMode2D.Impulse);
     }
 
     public void addHealth(float addHealth)
     {
-        if (photonView.IsMine)
-        {
             health += addHealth;
-        }
     }
 
     void TriggerAnimations()
@@ -213,23 +222,6 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     }
     void SetRigidBodyVelocity()
     {
-        //float speed = Vector2.SqrMagnitude(body.velocity);
-        //if (speed > maxSpd)
-        //
-        //{
-        //    float brakeSpeed = speed - maxSpd;
-        //
-        //    Vector2 normalisedVelocity = body.velocity.normalized;
-        //    Vector2 brakeVelocity = normalisedVelocity * brakeSpeed;
-        //
-        //    body.AddForce(-brakeVelocity);
-        //}
-        //else
-        //{
-        //    Vector2 newVelocity = new Vector3(horizontal, 0);
-        //    body.velocity += newVelocity.normalized;
-        //}
-
         Vector2 xVel = body.velocity;
         xVel.x = horizontal;
         body.velocity = xVel * maxSpd;
@@ -239,6 +231,9 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     {
         if (other.tag == "Player" && other.GetComponent<playerControl>() != null)
             takeHealth(0.1f);
+
+        if (other.tag == "Respawn")
+            Dead();
     }
     void OnTriggerStay2D(Collider2D other)
     {

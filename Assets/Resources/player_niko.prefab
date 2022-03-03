@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: -1109057601774297323}
   - component: {fileID: 5459255499670418321}
   - component: {fileID: -2399046733283215940}
+  - component: {fileID: -913107222034522949}
   m_Layer: 7
   m_Name: player_niko
   m_TagString: Player
@@ -277,7 +278,7 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 1
+  Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
@@ -287,6 +288,18 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-913107222034522949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3073775535737662286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 075f77f9a93644b41b9d2c107d75fb57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7588487972650151010
 GameObject:
   m_ObjectHideFlags: 0

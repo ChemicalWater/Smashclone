@@ -58,6 +58,7 @@ namespace smashclone
 
             Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
             PhotonNetwork.LoadLevel("scene_lior");
+            this.playerPrefab.GetComponent<playerControl>().health = 1f;
         }
 
         public void spawnItems()
@@ -103,7 +104,9 @@ namespace smashclone
             {
                 Destroy(item);
             }
-
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in players)
+                player.GetComponent<playerControl>().health = 1f;
         }
 
 
