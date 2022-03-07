@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using Photon.Pun;
 
-public class ItemSpawn : MonoBehaviour
+public class ItemSpawn : MonoBehaviourPun
 {
     [Tooltip("All possible spawnpoints for items")]
     [SerializeField] GameObject[] itemSpawnPoints;
@@ -30,29 +29,37 @@ public class ItemSpawn : MonoBehaviour
 
     void Update()
     {
-        if (timer < timerMax)
+        if (timer < timerMax && PhotonNetwork.IsMasterClient)
         {
             timer += Time.deltaTime;
         }
         else
         {
-            MoveItemToSpawnpoint();
-            timer = 0;
+            if (pickedUp && PhotonNetwork.IsMasterClient)
+            {
+                SetRandom();
+                photonView.RPC("MoveItemToSpawnpoint", RpcTarget.All, randomSpawn, randomItem);
+                timer = 0;
+            }
         }
     }
 
-    void MoveItemToSpawnpoint()
+    void SetRandom()
     {
-        if (pickedUp)
+        if (PhotonNetwork.IsMasterClient)
         {
             randomSpawn = Random.Range(0, itemSpawnPoints.Length);
             randomItem = Random.Range(0, items.Length);
-
-            transform.position = itemSpawnPoints[randomSpawn].transform.position;
-            items[randomItem].transform.position = itemSpawnPoints[randomSpawn].transform.position;
-            items[randomItem].gameObject.SetActive(true);
-            pickedUp = false;
         }
+    }
+
+    [PunRPC]
+    void MoveItemToSpawnpoint(int rndSpawn, int rndItem)
+    {
+            transform.position = itemSpawnPoints[rndSpawn].transform.position;
+            items[rndItem].transform.position = itemSpawnPoints[rndSpawn].transform.position;
+            items[rndItem].gameObject.SetActive(true);
+            pickedUp = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)

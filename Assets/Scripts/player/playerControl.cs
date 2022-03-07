@@ -125,10 +125,11 @@ public class playerControl : MonoBehaviourPun, IPunObservable
                 this.transform.GetChild(0).gameObject.SetActive(punching);
             }
 
-            if (Input.GetKey(KeyCode.F) && this.GetComponent<playerInventory>().Items.Count == 0)
+            if (Input.GetKey(KeyCode.F) && this.GetComponent<playerInventory>().Items.Count == 1)
             {
                 usingItem = true;
                 GetComponent<playerInventory>().useItem("Item_Health");
+                photonView.RPC("addHealth", RpcTarget.All, 0.2f);
             }
             else
                 usingItem = false;
@@ -147,8 +148,8 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     }
     void CalledOnLevelWasLoaded()
     {
-        GameObject UI = Instantiate(this.PlayerUiPrefab);
-        UI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+        //GameObject UI = Instantiate(this.PlayerUiPrefab);
+        //UI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
 
         health = 1f;
     }
@@ -159,7 +160,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
             health -= remHealth;
             //body.AddForce(new Vector2(((1 - health) * (punchPower)), 0), ForceMode2D.Impulse);
     }
-
+    [PunRPC]
     public void addHealth(float addHealth)
     {
             health += addHealth;

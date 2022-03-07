@@ -14,13 +14,14 @@ public class playerInventory : MonoBehaviour
     public void attachItem (string itemName)
     {
         Items.Add(itemName);
+        Debug.Log(Items.Count);
     }
 
     public void useItem(string itemName)
     {
         switch (itemName) {
             case "Item_Health":
-                this.GetComponent<playerControl>().addHealth(0.2f);
+               // this.GetComponent<playerControl>().addHealth(0.2f);
                 Items.Remove(itemName);
                 break;
 
