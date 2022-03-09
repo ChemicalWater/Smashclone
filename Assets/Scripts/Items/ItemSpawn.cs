@@ -35,7 +35,7 @@ public class ItemSpawn : MonoBehaviourPun
         }
         else
         {
-            if (!spawned && PhotonNetwork.IsMasterClient)
+            if (!spawned && PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount > 1)
             {
                 SetRandom();
                 photonView.RPC("MoveItemToSpawnpoint", RpcTarget.All, randomSpawn, randomItem);

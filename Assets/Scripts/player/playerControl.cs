@@ -41,6 +41,11 @@ public class playerControl : MonoBehaviourPun, IPunObservable
         {
             playerControl.LocalPlayerInstance = this.gameObject;
         }
+
+        if (!photonView.IsMine)
+        {
+            gameObject.tag = "Enemy";
+        }
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
         DontDestroyOnLoad(this.gameObject);
@@ -151,8 +156,6 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     {
         //GameObject UI = Instantiate(this.PlayerUiPrefab);
         //UI.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
-
-        health = 1f;
     }
 
     [PunRPC]
@@ -165,6 +168,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     [PunRPC]
     public void addHealth(float addHealth)
     {
+        if (photonView.IsMine)
             health += addHealth;
     }
 
@@ -232,7 +236,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && other.GetComponent<playerControl>() != null)
+        if (other.tag == "Enemy" && other.GetComponent<playerControl>() != null)
         {
             photonView.RPC("takeHealth", other.transform.GetComponent<PhotonView>().Controller, dmgHit);
             Debug.Log("My health: " + GetComponent<playerControl>().health);
