@@ -9,7 +9,6 @@ public class ItemSpawn : MonoBehaviourPun
     [SerializeField] GameObject[] itemSpawnPoints;
     [Tooltip("All possible items that are able to spawn")]
     [SerializeField] GameObject[] items;
-
     [Tooltip("Amount of time it takes between item spawns in frames")]
     [SerializeField]
     float timerMax = 15;
@@ -17,7 +16,7 @@ public class ItemSpawn : MonoBehaviourPun
 
     private int randomSpawn;
     private int randomItem;
-    private bool pickedUp = true;
+    private bool spawned = false;
 
     void Start()
     {
@@ -25,17 +24,18 @@ public class ItemSpawn : MonoBehaviourPun
         {
             item.SetActive(false);
         }
+        items[0].transform.parent.GetComponent<Collider2D>().enabled = false;
     }
 
     void Update()
     {
-        if (timer < timerMax && PhotonNetwork.IsMasterClient)
+        if (timer < timerMax && PhotonNetwork.IsMasterClient && !spawned && PhotonNetwork.CurrentRoom.PlayerCount > 1)
         {
             timer += Time.deltaTime;
         }
         else
         {
-            if (pickedUp && PhotonNetwork.IsMasterClient)
+            if (!spawned && PhotonNetwork.IsMasterClient)
             {
                 SetRandom();
                 photonView.RPC("MoveItemToSpawnpoint", RpcTarget.All, randomSpawn, randomItem);
@@ -56,19 +56,32 @@ public class ItemSpawn : MonoBehaviourPun
     [PunRPC]
     void MoveItemToSpawnpoint(int rndSpawn, int rndItem)
     {
-            transform.position = itemSpawnPoints[rndSpawn].transform.position;
-            items[rndItem].transform.position = itemSpawnPoints[rndSpawn].transform.position;
-            items[rndItem].gameObject.SetActive(true);
-            pickedUp = false;
+        randomItem = rndItem;
+        randomSpawn = rndSpawn;
+        transform.position = itemSpawnPoints[randomSpawn].transform.position;
+        items[randomItem].transform.position = itemSpawnPoints[randomSpawn].transform.position;
+        items[randomItem].transform.parent.GetComponent<Collider2D>().enabled = true;
+        items[randomItem].gameObject.SetActive(true);
+        spawned = true;
+    }
+
+    [PunRPC]
+    void PickUp()
+    {
+        items[randomItem].transform.parent.GetComponent<Collider2D>().enabled = false;
+        items[randomItem].gameObject.SetActive(false);
+        spawned = false;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && other.GetComponent<playerInventory>().Items.Count == 0)
+        if (other.tag == "Player")
         {
-            items[randomItem].gameObject.SetActive(false);
-            pickedUp = true;
-            other.GetComponent<playerInventory>().attachItem(items[randomItem].name);
+            if (spawned)
+            {
+                other.GetComponent<playerInventory>().attachItem(items[randomItem].name);
+                photonView.RPC("PickUp", RpcTarget.All);
+            }
         }
     }
 }

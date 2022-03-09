@@ -23,6 +23,8 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     public bool facingRight = true;
     private bool usingItem = false;
     public float health = 1f;
+    [Tooltip("How much damage does one player hit do?")]
+    [SerializeField] private float dmgHit = 0.1f;
 
     [Tooltip("The Player's UI GameObject Prefab")]
     [SerializeField]
@@ -92,7 +94,6 @@ public class playerControl : MonoBehaviourPun, IPunObservable
         }
     }
 
-
     #endregion
 
     void FixedUpdate()
@@ -115,9 +116,11 @@ public class playerControl : MonoBehaviourPun, IPunObservable
 
             if (Input.GetKey(KeyCode.Space))
             {
-                punching = true;
-                this.transform.GetChild(0).gameObject.SetActive(punching);
-                Debug.Log(health);
+                if (!punching)
+                {
+                    punching = true;
+                    this.transform.GetChild(0).gameObject.SetActive(punching);
+                }
             }
             else
             {
@@ -125,25 +128,23 @@ public class playerControl : MonoBehaviourPun, IPunObservable
                 this.transform.GetChild(0).gameObject.SetActive(punching);
             }
 
-            if (Input.GetKey(KeyCode.F) && this.GetComponent<playerInventory>().Items.Count == 1)
+            if (Input.GetKey(KeyCode.F) && this.GetComponent<playerInventory>().Items.Count >= 1)
             {
                 usingItem = true;
-                GetComponent<playerInventory>().useItem("Item_Health");
-                photonView.RPC("addHealth", RpcTarget.All, 0.2f);
+                photonView.RPC("addHealth", transform.GetComponent<PhotonView>().Controller, GetComponent<playerInventory>().useItem("Item_Health"));
             }
             else
                 usingItem = false;
-        }
-        if (this.health <= 0)
-            Dead();
-    }
 
+            if (this.health <= 0)
+                Dead();
+        }
+    }
     void Dead()
     {
         if (PhotonNetwork.IsConnected)
         {
-            PhotonNetwork.Disconnect();
-            health = 1f;
+            PhotonNetwork.LeaveRoom();
         }
     }
     void CalledOnLevelWasLoaded()
@@ -154,12 +155,13 @@ public class playerControl : MonoBehaviourPun, IPunObservable
         health = 1f;
     }
 
+    [PunRPC]
     public void takeHealth(float remHealth)
     {
-        Debug.Log(health + "" + PhotonNetwork.NickName);
             health -= remHealth;
-            //body.AddForce(new Vector2(((1 - health) * (punchPower)), 0), ForceMode2D.Impulse);
+            body.AddForce(new Vector2(((1 - health) * (punchPower)), 0), ForceMode2D.Impulse);
     }
+
     [PunRPC]
     public void addHealth(float addHealth)
     {
@@ -231,7 +233,11 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player" && other.GetComponent<playerControl>() != null)
-            takeHealth(0.1f);
+        {
+            photonView.RPC("takeHealth", other.transform.GetComponent<PhotonView>().Controller, dmgHit);
+            Debug.Log("My health: " + GetComponent<playerControl>().health);
+            Debug.Log("Enemy health: " + other.GetComponent<playerControl>().health);
+        }
 
         if (other.tag == "Respawn")
             Dead();

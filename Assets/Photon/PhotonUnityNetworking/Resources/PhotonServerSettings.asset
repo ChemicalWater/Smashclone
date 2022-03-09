@@ -41,6 +41,9 @@ MonoBehaviour:
   - RespawnSpaceship
   - addHealth
   - MoveItemToSpawnpoint
+  - Dead
+  - takeHealth
+  - PickUp
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
