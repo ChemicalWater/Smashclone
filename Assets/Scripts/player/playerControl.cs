@@ -147,7 +147,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     }
     void Dead()
     {
-        if (PhotonNetwork.IsConnected)
+        if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
         {
             PhotonNetwork.LeaveRoom();
         }
@@ -161,6 +161,8 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     [PunRPC]
     public void takeHealth(float remHealth)
     {
+        Debug.Log("TAKING DAMAGE");
+        Debug.Log(remHealth);
             health -= remHealth;
             body.AddForce(new Vector2(((1 - health) * (punchPower)), 0), ForceMode2D.Impulse);
     }
@@ -227,6 +229,12 @@ public class playerControl : MonoBehaviourPun, IPunObservable
             animPlayer.SetBool("jump_left", false);
 
     }
+
+    void Test()
+    {
+        photonView.RPC("takeHealth", GameObject.FindGameObjectWithTag("Enemy").transform.GetComponent<PhotonView>().Controller, dmgHit);
+    }
+
     void SetRigidBodyVelocity()
     {
         Vector2 xVel = body.velocity;
@@ -238,7 +246,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     {
         if (other.tag == "Enemy" && other.GetComponent<playerControl>() != null)
         {
-            photonView.RPC("takeHealth", other.transform.GetComponent<PhotonView>().Controller, dmgHit);
+            Test();
             Debug.Log("My health: " + GetComponent<playerControl>().health);
             Debug.Log("Enemy health: " + other.GetComponent<playerControl>().health);
         }

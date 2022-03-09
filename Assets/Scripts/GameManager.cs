@@ -97,9 +97,6 @@ namespace smashclone
 
                 LoadArena();
             }
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject player in players)
-                player.GetComponent<playerControl>().health = 1f;
         }
 
 
