@@ -167,6 +167,8 @@ public class playerControl : MonoBehaviourPun, IPunObservable
             health -= remHealth;
             body.AddForce(new Vector2(((1 - health) * (punchPower)), 0), ForceMode2D.Impulse);
         }
+        else
+            Debug.Log("Hello " + transform.GetComponent<PhotonView>().ViewID);
     }
 
     [PunRPC]
@@ -178,6 +180,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
 
     void TriggerAnimations()
     {
+        animPlayer.SetFloat("speed", horizontal);
         if (facingRight && usingItem && allowJump)
         {
             animPlayer.SetBool("use_right", true);
@@ -229,7 +232,6 @@ public class playerControl : MonoBehaviourPun, IPunObservable
             animPlayer.SetBool("jump_left", true);
         else
             animPlayer.SetBool("jump_left", false);
-
     }
 
     void Test()
@@ -248,7 +250,8 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     {
         if (other.tag == "Enemy" && other.GetComponent<playerControl>() != null)
         {
-            photonView.RPC("takeHealth", RpcTarget.All, dmgHit);
+            other.GetComponent<PhotonView>().RPC("takeHealth", RpcTarget.All, dmgHit);
+            //photonView.RPC("takeHealth", RpcTarget.Others, dmgHit);
             Debug.Log("My health: " + GetComponent<playerControl>().health);
             Debug.Log("Enemy health: " + other.GetComponent<playerControl>().health);
         }
