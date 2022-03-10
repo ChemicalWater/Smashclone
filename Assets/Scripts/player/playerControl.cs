@@ -161,10 +161,12 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     [PunRPC]
     public void takeHealth(float remHealth)
     {
-        Debug.Log("TAKING DAMAGE");
-        Debug.Log(remHealth);
+        if (photonView.IsMine)
+        {
+            Debug.Log("TAKING DAMAGE");
             health -= remHealth;
             body.AddForce(new Vector2(((1 - health) * (punchPower)), 0), ForceMode2D.Impulse);
+        }
     }
 
     [PunRPC]
@@ -246,7 +248,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     {
         if (other.tag == "Enemy" && other.GetComponent<playerControl>() != null)
         {
-            Test();
+            photonView.RPC("takeHealth", RpcTarget.All, dmgHit);
             Debug.Log("My health: " + GetComponent<playerControl>().health);
             Debug.Log("Enemy health: " + other.GetComponent<playerControl>().health);
         }
