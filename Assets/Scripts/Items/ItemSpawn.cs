@@ -11,7 +11,7 @@ public class ItemSpawn : MonoBehaviourPun
     [SerializeField] GameObject[] items;
     [Tooltip("Amount of time it takes between item spawns in frames")]
     [SerializeField]
-    float timerMax = 15;
+    float timerMax = 30f;
     private float timer;
 
     private int randomSpawn;
@@ -75,7 +75,7 @@ public class ItemSpawn : MonoBehaviourPun
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && other.GetComponent<playerInventory>() != null)
         {
             if (spawned)
             {
