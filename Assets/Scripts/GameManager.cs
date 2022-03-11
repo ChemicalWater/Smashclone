@@ -16,6 +16,9 @@ namespace smashclone
 {
     public class GameManager : MonoBehaviourPunCallbacks
     {
+        [Tooltip("All possible prefabs for the player to have")]
+        public GameObject[] playerPrefabList;
+
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
         [Tooltip("The prefab to use spawning items")]

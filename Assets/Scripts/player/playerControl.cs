@@ -116,6 +116,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
                 {
                     body.AddForce(new Vector3(0, jumpHeight, 0), ForceMode2D.Impulse);
                     allowJump = false;
+                    animPlayer.SetBool("jump", true);
                 }
             }
 
@@ -125,11 +126,13 @@ public class playerControl : MonoBehaviourPun, IPunObservable
                 {
                     punching = true;
                     this.transform.GetChild(0).gameObject.SetActive(punching);
+                    animPlayer.SetBool("punch", punching);          
                 }
             }
             else
             {
                 punching = false;
+                animPlayer.SetBool("punch", punching);
                 this.transform.GetChild(0).gameObject.SetActive(punching);
             }
 
@@ -137,9 +140,14 @@ public class playerControl : MonoBehaviourPun, IPunObservable
             {
                 usingItem = true;
                 photonView.RPC("addHealth", transform.GetComponent<PhotonView>().Controller, GetComponent<playerInventory>().useItem("Item_Health"));
+                body.velocity = new Vector3(0, 0);
+                animPlayer.SetBool("use", usingItem);
             }
             else
+            {
                 usingItem = false;
+                animPlayer.SetBool("use", usingItem);
+            }
 
             if (this.health <= 0)
                 Dead();
@@ -181,62 +189,11 @@ public class playerControl : MonoBehaviourPun, IPunObservable
     void TriggerAnimations()
     {
         animPlayer.SetFloat("speed", horizontal);
-        if (facingRight && usingItem && allowJump)
-        {
-            animPlayer.SetBool("use_right", true);
-            body.velocity = new Vector3(0, 0);
-        }
-        else
-            animPlayer.SetBool("use_right", false);
 
-        if (!facingRight && usingItem && allowJump)
-        {
-            animPlayer.SetBool("use_left", true);
-            body.velocity = new Vector3(0, 0);
-        }
-        else
-            animPlayer.SetBool("use_left", false);
-
-        if (punching && facingRight)
-            animPlayer.SetBool("punch_right", true);
-        else
-            animPlayer.SetBool("punch_right", false);
-
-        if (punching && !facingRight)
-            animPlayer.SetBool("punch_left", true);
-        else
-            animPlayer.SetBool("punch_left", false);
-
-        if (body.velocity.x > 0)
-        {
-            facingRight = true;
-            animPlayer.SetBool("walk_right", true);
-        }
-        else
-            animPlayer.SetBool("walk_right", false);
-
-        if (body.velocity.x < 0)
-        {
-            facingRight = false;
-            animPlayer.SetBool("walk_left", true);
-        }
-        else
-            animPlayer.SetBool("walk_left", false);
-
-        if (body.velocity.y > 0 && body.velocity.x > 0 || body.velocity.y > 0 && facingRight)
-            animPlayer.SetBool("jump_right", true);
-        else
-            animPlayer.SetBool("jump_right", false);
-
-        if (body.velocity.y > 0 && body.velocity.x < 0 || body.velocity.y > 0 && !facingRight)
-            animPlayer.SetBool("jump_left", true);
-        else
-            animPlayer.SetBool("jump_left", false);
-    }
-
-    void Test()
-    {
-        photonView.RPC("takeHealth", GameObject.FindGameObjectWithTag("Enemy").transform.GetComponent<PhotonView>().Controller, dmgHit);
+        if (horizontal > 0)
+            animPlayer.SetBool("facingRight", true);
+        else if (horizontal < 0)
+            animPlayer.SetBool("facingRight", false);
     }
 
     void SetRigidBodyVelocity()
@@ -251,7 +208,6 @@ public class playerControl : MonoBehaviourPun, IPunObservable
         if (other.tag == "Enemy" && other.GetComponent<playerControl>() != null)
         {
             other.GetComponent<PhotonView>().RPC("takeHealth", RpcTarget.All, dmgHit);
-            //photonView.RPC("takeHealth", RpcTarget.Others, dmgHit);
             Debug.Log("My health: " + GetComponent<playerControl>().health);
             Debug.Log("Enemy health: " + other.GetComponent<playerControl>().health);
         }
@@ -264,6 +220,7 @@ public class playerControl : MonoBehaviourPun, IPunObservable
         if (other.tag == "platforms" && transform.position.y > other.transform.position.y)
         {
             allowJump = true;
+            animPlayer.SetBool("jump", false);
         }
     }
 }
