@@ -94,7 +94,7 @@ namespace smashclone
 
                 // #Critical
                 // Load the Room Level.
-                PhotonNetwork.LoadLevel("scene_lior");
+                PhotonNetwork.LoadLevel("scene_doodle_map");
             }
         }
 

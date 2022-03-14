@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu/main_home.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Maps/scene_lior.unity
+    path: Assets/Scenes/Maps/scene_lior_brawl.unity
     guid: 08273767767a4e245a3b2f05d8ce6875
+  - enabled: 1
+    path: Assets/Scenes/Maps/scene_doodle_map.unity
+    guid: d452653ae3212884b948af8289411127
   m_configObjects: {}

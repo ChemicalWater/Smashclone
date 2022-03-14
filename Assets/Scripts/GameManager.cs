@@ -61,7 +61,7 @@ namespace smashclone
             }
 
             Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel("scene_lior");
+            PhotonNetwork.LoadLevel("scene_doodle_map");
             this.playerPrefab.GetComponent<playerControl>().health = 1f;
         }
 
