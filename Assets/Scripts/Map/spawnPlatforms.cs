@@ -9,12 +9,14 @@ public class spawnPlatforms : MonoBehaviourPun
     [SerializeField] private GameObject bigPlatform;
     [SerializeField] private GameObject smallPlatform;
     [SerializeField] private GameObject[] spawnPoints;
-    [SerializeField] private float totalPlatforms = 4f;
-    [SerializeField] private float timerMax = 3f;
+    [SerializeField] private float totalPlatforms = 12f;
+    [SerializeField] private float timerMax = 2f;
     private ArrayList spawnedPlatforms;
     private float timer;
     private float randomX;
     private float randomY;
+    private int lastRandom;
+    private int rndSpawn;
 
     void Start()
     {
@@ -24,6 +26,7 @@ public class spawnPlatforms : MonoBehaviourPun
     [PunRPC]
     void SpawnPlatforms(Vector3 platformPos)
     {
+        Debug.Log("Total platforms spawned: " + spawnedPlatforms.Count);
         spawnedPlatforms.Add(PhotonNetwork.Instantiate(smallPlatform.name, platformPos, transform.rotation));
     }
     
@@ -32,8 +35,23 @@ public class spawnPlatforms : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            int rndSpawn = Random.Range(0, spawnPoints.Length);
-            Vector3 randomPos = new Vector3(spawnPoints[rndSpawn].transform.position.x, spawnPoints[rndSpawn].transform.position.y, 0);
+            rndSpawn = Random.Range(0, spawnPoints.Length);
+            Vector3 randomPos;
+
+            if (rndSpawn != lastRandom)
+            {
+                lastRandom = rndSpawn;
+                randomPos = new Vector3(spawnPoints[rndSpawn].transform.position.x, spawnPoints[rndSpawn].transform.position.y, 0);
+            } else
+            {
+                if (rndSpawn != spawnPoints.Length)
+                    rndSpawn += 1;
+                else
+                    rndSpawn = Random.Range(0, spawnPoints.Length);
+
+                randomPos = new Vector3(spawnPoints[rndSpawn].transform.position.x, spawnPoints[rndSpawn].transform.position.y, 0);
+            }
+
             return randomPos;
         }
         return new Vector3(50,0,0);
@@ -42,13 +60,13 @@ public class spawnPlatforms : MonoBehaviourPun
 
     void Update()
     {
-        if (spawnedPlatforms.Count < totalPlatforms && timer < timerMax && PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount > 1)
+        if (spawnedPlatforms.Count < totalPlatforms && timer < timerMax && PhotonNetwork.IsMasterClient)
         {
             timer += Time.deltaTime;
         }
         else
         {
-            if (spawnedPlatforms.Count < totalPlatforms && PhotonNetwork.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount > 1)
+            if (spawnedPlatforms.Count < totalPlatforms && PhotonNetwork.IsMasterClient)
             {
                 photonView.RPC("SpawnPlatforms", RpcTarget.All, setRandom());
                 timer = 0;
