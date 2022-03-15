@@ -24,6 +24,8 @@ namespace smashclone
         [Tooltip("The prefab to use spawning items")]
         public GameObject itemSpawner;
         private GameObject itemSpawnClone;
+        [Tooltip("The prefab to use for spawning platforms")]
+        public GameObject platformSpawner;
 
 
         void Start()
@@ -43,6 +45,7 @@ namespace smashclone
                     if (!itemSpawnClone)
                     {
                         spawnItems();
+                        spawnPlatforms();
                     }
                 }
                 else
@@ -68,6 +71,11 @@ namespace smashclone
         public void spawnItems()
         {
                 itemSpawnClone = PhotonNetwork.Instantiate(this.itemSpawner.name, new Vector3(-0.1138714f, -0.7103133f, 0f), Quaternion.identity, 0);
+        }
+
+        public void spawnPlatforms()
+        {
+            platformSpawner = PhotonNetwork.Instantiate(this.platformSpawner.name, new Vector3(0, 0, 0f), Quaternion.identity, 0);
         }
 
         #endregion

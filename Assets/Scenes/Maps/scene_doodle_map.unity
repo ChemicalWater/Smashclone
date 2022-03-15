@@ -883,6 +883,10 @@ PrefabInstance:
       propertyPath: playerPrefab
       value: 
       objectReference: {fileID: 3073775535737662286, guid: 13cbae575cda54a499ed7164dfd66ce5, type: 3}
+    - target: {fileID: 1695089071180204072, guid: 5b5d398d0d1a49e4783392907b9dc8d1, type: 3}
+      propertyPath: platformSpawner
+      value: 
+      objectReference: {fileID: 2774878713805621193, guid: dcb7cfe5026134d438706f2c02ee3f0d, type: 3}
     - target: {fileID: 3370430292293284994, guid: 5b5d398d0d1a49e4783392907b9dc8d1, type: 3}
       propertyPath: m_RootOrder
       value: 2
