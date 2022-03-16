@@ -26,11 +26,14 @@ public class mapChoice : MonoBehaviourPun
         bgSprite = background.GetComponent<SpriteRenderer>();
         bigSprite = bigPlatforms.GetComponent<SpriteRenderer>();
         smallSprite = smallPlatforms.GetComponent<SpriteRenderer>();
+        Debug.Log(bgSprite);
+
     }
 
     [PunRPC]
     void changeMap(int map)
     {
+        Debug.Log(bgSprite);
        // bgSprite.sprite = backgrounds[map];
        // bigSprite.sprite = movingBigPlatforms[map];
        // smallSprite.sprite = movingSmallPlatforms[map];

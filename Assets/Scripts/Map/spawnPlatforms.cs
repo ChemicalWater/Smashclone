@@ -6,12 +6,20 @@ using Photon.Pun;
 public class spawnPlatforms : MonoBehaviourPun
 {
 
+    [Tooltip("The prefab for big platforms")]
     [SerializeField] private GameObject bigPlatform;
+    [Tooltip("The prefab for small platforms")]
     [SerializeField] private GameObject smallPlatform;
+    [Tooltip("All the spawnpoints for platforms")]
     [SerializeField] private GameObject[] spawnPoints;
-    [SerializeField] private float totalPlatforms = 12f;
-    [SerializeField] private float timerMax = 2f;
+    [Tooltip("The amount of platforms are spawned in total")]
+    [SerializeField] private float totalPlatforms = 9f;
+    [Tooltip("How long it takes between each platform in seconds")]
+    [SerializeField] private float timerMax = 1.3f;
+    [Tooltip("The platform players spawn upon")]
+    [SerializeField] private GameObject playerPlatform;
     private ArrayList spawnedPlatforms;
+    private GameObject playerSpawnPlat;
     private float timer;
     private float randomX;
     private float randomY;
@@ -23,15 +31,18 @@ public class spawnPlatforms : MonoBehaviourPun
     void Start()
     {
         spawnedPlatforms = new ArrayList();
+
+        if (PhotonNetwork.IsMasterClient)
+        playerSpawnPlat = PhotonNetwork.Instantiate(playerPlatform.name, new Vector3(0, -1, 0), transform.rotation);
     }
 
     [PunRPC]
     void SpawnPlatforms(Vector3 platformPos)
     {
-        Debug.Log("Total platforms spawned: " + spawnedPlatforms.Count);
         spawnedPlatforms.Add(PhotonNetwork.Instantiate(smallPlatform.name, platformPos, transform.rotation));
+        Debug.Log("Total platforms spawned: " + spawnedPlatforms.Count);
     }
-    
+
     [PunRPC]
     public Vector3 setRandom()
     {
@@ -45,83 +56,41 @@ public class spawnPlatforms : MonoBehaviourPun
             } else
             {
                 int randomPick = Random.Range(0, 2);
-                Debug.Log("RandomPicked: " + randomPick + " right: " + (rndSpawn+1) + " left: " + (rndSpawn-1) );
+                Debug.Log("randomPicked: " + randomPick + " right: " + (rndSpawn+1) + " left: " + (rndSpawn-1) );
+                switch (randomPick)
+                {
+                    case 0:
 
-                if (randomPick == 0 && (rndSpawn - 1) != -1 )
-                {
-                    rndSpawn = rndSpawn - 1;
-                    Debug.Log("New left spawn: " + rndSpawn);
-                }
-                if ( (rndSpawn -1 ) == -1)
-                {
-                    rndSpawn = rndSpawn + 1;
-                    Debug.Log("Cant go left");
-                }
+                        if ((rndSpawn - 1) >= 0)
+                        {
+                            rndSpawn = rndSpawn - 1;
+                            Debug.Log("New left spawn: " + rndSpawn);
+                        }
+                        else
+                            rndSpawn += 1;
 
-                if (randomPick == 1 && (rndSpawn + 1) != (spawnPoints.Length +1))
-                {
-                    rndSpawn = rndSpawn + 1;
-                    Debug.Log("New right spawn: " + rndSpawn);
-                }
-                if ( (rndSpawn+1) == spawnPoints.Length +1)
-                {
-                    rndSpawn = rndSpawn - 1;
-                    Debug.Log("Cant go right");
+                        break;
+
+                    case 1:
+
+                        if ((rndSpawn + 1) <= (spawnPoints.Length - 1))
+                        {
+                            rndSpawn = rndSpawn + 1;
+                            Debug.Log("New right spawn: " + rndSpawn);
+                        } else
+                            rndSpawn -= 1;
+
+                        break;
                 }
             }
-            randomPos = new Vector3(spawnPoints[rndSpawn].transform.position.x, spawnPoints[rndSpawn].transform.position.y, 0);
-
-            // Random spawning attempt 2
-            // Vector3 randomPos;
-            // if (rndSpawn != lastRandom && !startedSpawning)
-            // {
-            //     rndSpawn = Random.Range(0, spawnPoints.Length);
-            //     lastRandom = rndSpawn;
-            //     Debug.Log("Random chosen start: " + rndSpawn);
-            //     randomPos = new Vector3(spawnPoints[rndSpawn].transform.position.x, spawnPoints[rndSpawn].transform.position.y, 0);
-            //     startedSpawning = true;
-            // }
-            // else
-            // {
-            //     if (lastRandom <= spawnPoints.Length && goingRight)
-            //     {
-            //         lastRandom += 1;
-            //         Debug.Log("Going right: " + lastRandom);
-            //     }
-            //     else
-            //     {
-            //         lastRandom -= 1;
-            //         Debug.Log("Going left: " + lastRandom);
-            //
-            //         randomPos = new Vector3(spawnPoints[lastRandom].transform.position.x, spawnPoints[lastRandom].transform.position.y, 0);
-            //     }
-            // }
-
-            // Random spawning attempt 1
-            //rndSpawn = Random.Range(0, spawnPoints.Length);
-            //Vector3 randomPos;
-
-            // if (rndSpawn != lastRandom)
-            // {
-            //     lastRandom = rndSpawn;
-            //     randomPos = new Vector3(spawnPoints[rndSpawn].transform.position.x, spawnPoints[rndSpawn].transform.position.y, 0);
-            // } else
-            // {
-            //     if (rndSpawn != spawnPoints.Length)
-            //         rndSpawn += 1;
-            //     else
-            //         rndSpawn = Random.Range(0, spawnPoints.Length);
-            //
-            //     randomPos = new Vector3(spawnPoints[rndSpawn].transform.position.x, spawnPoints[rndSpawn].transform.position.y, 0);
-            // }
+            randomPos = new Vector3(spawnPoints[rndSpawn].transform.position.x, spawnPoints[rndSpawn].transform.position.y, 0);           
 
             return randomPos;
         }
         return new Vector3(50,0,0);
     }
 
-
-    void Update()
+    void FixedUpdate()
     {
         if (spawnedPlatforms.Count < totalPlatforms && timer < timerMax && PhotonNetwork.IsMasterClient)
         {
@@ -131,7 +100,8 @@ public class spawnPlatforms : MonoBehaviourPun
         {
             if (spawnedPlatforms.Count < totalPlatforms && PhotonNetwork.IsMasterClient)
             {
-                photonView.RPC("SpawnPlatforms", RpcTarget.All, setRandom());
+                Debug.Log("SPAWNING: " + timer);
+                photonView.RPC("SpawnPlatforms", RpcTarget.All, setRandom() );
                 timer = 0;
             }
         }
