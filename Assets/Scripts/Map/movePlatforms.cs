@@ -10,7 +10,6 @@ public class movePlatforms : MonoBehaviourPun
 
     void Start()
     {
-        Debug.Log("Speed: " + moveSpeed + " Owner: " + photonView.ViewID + " Pos: " + transform.position);
         platformSprite = GetComponent<SpriteRenderer>();
         transform.SetParent(GameObject.FindGameObjectWithTag("test").transform);
     }
