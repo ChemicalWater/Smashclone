@@ -24,16 +24,14 @@ public class mapChoice : MonoBehaviourPun
             photonView.RPC("changeMap", RpcTarget.AllBuffered, 0);
         }
         bgSprite = background.GetComponent<SpriteRenderer>();
-        bigSprite = bigPlatforms.GetComponent<SpriteRenderer>();
-        smallSprite = smallPlatforms.GetComponent<SpriteRenderer>();
-        Debug.Log(bgSprite);
-
+        //bigSprite = bigPlatforms.GetComponent<SpriteRenderer>();
+        //smallSprite = smallPlatforms.GetComponent<SpriteRenderer>();
     }
 
     [PunRPC]
     void changeMap(int map)
     {
-       // bgSprite.sprite = backgrounds[map];
+        bgSprite.sprite = backgrounds[map];
        // bigSprite.sprite = movingBigPlatforms[map];
        // smallSprite.sprite = movingSmallPlatforms[map];
     }

@@ -36,15 +36,15 @@ public class spawnPlatforms : MonoBehaviourPun
     {
         spawnedPlatforms = new ArrayList();
 
-        if (PhotonNetwork.IsMasterClient)
-        playerSpawnPlat = PhotonNetwork.Instantiate(playerPlatform.name, new Vector3(0, -1, 0), transform.rotation);
+      // if (PhotonNetwork.IsMasterClient && playerSpawnPlat == null)
+      // playerSpawnPlat = PhotonNetwork.Instantiate(playerPlatform.name, new Vector3(0, -1, 0), transform.rotation);
     }
 
     [PunRPC]
     void SpawnPlatforms(Vector3 platformPos)
     {
+        if (PhotonNetwork.IsMasterClient)
         spawnedPlatforms.Add(PhotonNetwork.Instantiate(smallPlatform.name, platformPos, transform.rotation));
-        Debug.Log("Total platforms spawned: " + spawnedPlatforms.Count);
     }
 
     [PunRPC]
@@ -91,32 +91,30 @@ public class spawnPlatforms : MonoBehaviourPun
         return new Vector3(50,0,0);
     }
 
+    [PunRPC]
     void blipPlatform()
     {
-        playerSpawnPlat.SetActive(false);
-       // playerSpawnPlatform = playerPlatform.GetComponentsInChildren<SpriteRenderer>();
-       //
-       // foreach (SpriteRenderer platform in playerSpawnPlatform)
-       // {
-       //     platform.gameObject.SetActive(false);
-       // }
+        if (PhotonNetwork.IsMasterClient && GameObject.FindGameObjectWithTag("spawnplatform") != null)
+        GameObject.FindGameObjectWithTag("spawnplatform").gameObject.SetActive(false);
     }
 
     void FixedUpdate()
     {
-        if (spawnedPlatforms.Count < totalPlatforms && timer < timerMax && PhotonNetwork.IsMasterClient)
+        if (spawnedPlatforms.Count < totalPlatforms && timer < timerMax && PhotonNetwork.IsMasterClient) // PhotonNetwork.CurrentRoom.PlayerCount > 1 to make it wait for 2 players
         {
             timer += Time.deltaTime;
         }
         else
         {
-            if (spawnedPlatforms.Count < totalPlatforms && PhotonNetwork.IsMasterClient)
+            if (spawnedPlatforms.Count < totalPlatforms && PhotonNetwork.IsMasterClient) // PhotonNetwork.CurrentRoom.PlayerCount > 1 to make it wait for 2 players
             {
                 photonView.RPC("SpawnPlatforms", RpcTarget.All, setRandom() );
                 timer = 0;
             }
         }
-        if (spawnedPlatforms.Count == 6)
-            blipPlatform();
+       // if (spawnedPlatforms.Count == 6)
+       // {
+       //     photonView.RPC("blipPlatform", RpcTarget.All);
+       // }
     }
 }

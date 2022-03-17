@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 2774878713805621196}
   m_Layer: 0
   m_Name: platforms_moving
-  m_TagString: test
+  m_TagString: platforms
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -217,6 +217,7 @@ MonoBehaviour:
   totalPlatforms: 9
   timerMax: 1.3
   playerPlatform: {fileID: 7984466854225329446, guid: 9b11d45f3307eb9468a419987ecc0cd0, type: 3}
+  dissapearTime: 8
 --- !u!114 &2774878713805621196
 MonoBehaviour:
   m_ObjectHideFlags: 0

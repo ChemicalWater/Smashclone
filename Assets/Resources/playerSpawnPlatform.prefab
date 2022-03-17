@@ -263,9 +263,10 @@ GameObject:
   - component: {fileID: 7984466854225329444}
   - component: {fileID: 7984466854225329445}
   - component: {fileID: 2289963492495555183}
+  - component: {fileID: -7808009178896216978}
   m_Layer: 6
   m_Name: playerSpawnPlatform
-  m_TagString: platforms
+  m_TagString: spawnplatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -336,3 +337,15 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-7808009178896216978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7984466854225329446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be8322fa66d1f6942a589ab17810ca50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

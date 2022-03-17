@@ -9,7 +9,7 @@ TagManager:
   - health
   - Items
   - Enemy
-  - test
+  - spawnplatform
   layers:
   - Default
   - TransparentFX

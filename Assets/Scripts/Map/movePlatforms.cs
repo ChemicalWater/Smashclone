@@ -11,7 +11,7 @@ public class movePlatforms : MonoBehaviourPun
     void Start()
     {
         platformSprite = GetComponent<SpriteRenderer>();
-        transform.SetParent(GameObject.FindGameObjectWithTag("test").transform);
+        transform.SetParent(GameObject.FindGameObjectWithTag("platforms").transform);
     }
 
     void FixedUpdate()

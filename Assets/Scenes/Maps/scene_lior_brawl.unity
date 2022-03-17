@@ -880,6 +880,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7104961628982307106, guid: 7bad6c09b4af27c4e9f9ad33f481e60c, type: 3}
     - target: {fileID: 1695089071180204072, guid: 5b5d398d0d1a49e4783392907b9dc8d1, type: 3}
+      propertyPath: ItemSpawning
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1695089071180204072, guid: 5b5d398d0d1a49e4783392907b9dc8d1, type: 3}
       propertyPath: playerPrefab
       value: 
       objectReference: {fileID: 3073775535737662286, guid: 13cbae575cda54a499ed7164dfd66ce5, type: 3}
