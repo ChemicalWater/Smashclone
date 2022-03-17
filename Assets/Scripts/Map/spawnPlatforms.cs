@@ -18,6 +18,11 @@ public class spawnPlatforms : MonoBehaviourPun
     [SerializeField] private float timerMax = 1.3f;
     [Tooltip("The platform players spawn upon")]
     [SerializeField] private GameObject playerPlatform;
+    [Tooltip("How long it takes for the player platform to dissapear")]
+    [SerializeField] private float dissapearTime = 8f;
+
+    //  private float platformTime;
+    //  private SpriteRenderer[] playerSpawnPlatform;
     private ArrayList spawnedPlatforms;
     private GameObject playerSpawnPlat;
     private float timer;
@@ -26,7 +31,6 @@ public class spawnPlatforms : MonoBehaviourPun
     private int lastRandom = 1;
     private int rndSpawn;
     private bool startedSpawning = false;
-    private bool goingRight;
 
     void Start()
     {
@@ -56,7 +60,6 @@ public class spawnPlatforms : MonoBehaviourPun
             } else
             {
                 int randomPick = Random.Range(0, 2);
-                Debug.Log("randomPicked: " + randomPick + " right: " + (rndSpawn+1) + " left: " + (rndSpawn-1) );
                 switch (randomPick)
                 {
                     case 0:
@@ -64,7 +67,6 @@ public class spawnPlatforms : MonoBehaviourPun
                         if ((rndSpawn - 1) >= 0)
                         {
                             rndSpawn = rndSpawn - 1;
-                            Debug.Log("New left spawn: " + rndSpawn);
                         }
                         else
                             rndSpawn += 1;
@@ -76,7 +78,6 @@ public class spawnPlatforms : MonoBehaviourPun
                         if ((rndSpawn + 1) <= (spawnPoints.Length - 1))
                         {
                             rndSpawn = rndSpawn + 1;
-                            Debug.Log("New right spawn: " + rndSpawn);
                         } else
                             rndSpawn -= 1;
 
@@ -90,6 +91,17 @@ public class spawnPlatforms : MonoBehaviourPun
         return new Vector3(50,0,0);
     }
 
+    void blipPlatform()
+    {
+        playerSpawnPlat.SetActive(false);
+       // playerSpawnPlatform = playerPlatform.GetComponentsInChildren<SpriteRenderer>();
+       //
+       // foreach (SpriteRenderer platform in playerSpawnPlatform)
+       // {
+       //     platform.gameObject.SetActive(false);
+       // }
+    }
+
     void FixedUpdate()
     {
         if (spawnedPlatforms.Count < totalPlatforms && timer < timerMax && PhotonNetwork.IsMasterClient)
@@ -100,10 +112,11 @@ public class spawnPlatforms : MonoBehaviourPun
         {
             if (spawnedPlatforms.Count < totalPlatforms && PhotonNetwork.IsMasterClient)
             {
-                Debug.Log("SPAWNING: " + timer);
                 photonView.RPC("SpawnPlatforms", RpcTarget.All, setRandom() );
                 timer = 0;
             }
         }
+        if (spawnedPlatforms.Count == 6)
+            blipPlatform();
     }
 }

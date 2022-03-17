@@ -33,7 +33,6 @@ public class mapChoice : MonoBehaviourPun
     [PunRPC]
     void changeMap(int map)
     {
-        Debug.Log(bgSprite);
        // bgSprite.sprite = backgrounds[map];
        // bigSprite.sprite = movingBigPlatforms[map];
        // smallSprite.sprite = movingSmallPlatforms[map];

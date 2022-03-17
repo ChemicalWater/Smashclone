@@ -74,6 +74,20 @@ public class playerControl : MonoBehaviourPun, IPunObservable
         {
             return;
         }
+
+        if (photonView.IsMine)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                if (allowJump)
+                {
+                    body.velocity = new Vector2(0, 0);
+                    body.AddForce(new Vector3(0, jumpHeight, 0), ForceMode2D.Impulse);
+                    allowJump = false;
+                    animPlayer.SetBool("jump", !allowJump);
+                }
+            }
+        }
     }
 
     #region IPunObservable implementation
@@ -109,16 +123,6 @@ public class playerControl : MonoBehaviourPun, IPunObservable
             horizontal = Input.GetAxisRaw("Horizontal");
             SetRigidBodyVelocity();
             TriggerAnimations();
-
-            if (Input.GetKey(KeyCode.W))
-            {
-                if (allowJump)
-                {
-                    body.AddForce(new Vector3(0, jumpHeight, 0), ForceMode2D.Impulse);
-                    allowJump = false;
-                    animPlayer.SetBool("jump", !allowJump);
-                }
-            }
 
             if (Input.GetKey(KeyCode.Space))
             {
