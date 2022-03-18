@@ -5,33 +5,37 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-
-public class MenuScript : MonoBehaviour
+namespace smashclone
 {
-    [SerializeField] GameObject homeScreen;
-    [SerializeField] GameObject profielScreen;
-
-    public void switchScreen(string toScreen)
+    public class MenuScript : MonoBehaviour
     {
-      if (toScreen == "Home")
+        [SerializeField]
+        GameObject homeScreen;
+        [SerializeField]
+        GameObject profielScreen;
+
+        public void switchScreen(string toScreen)
         {
-            homeScreen.SetActive(true);
-            profielScreen.SetActive(false);
+            if (toScreen == "Home")
+            {
+                homeScreen.SetActive(true);
+                profielScreen.SetActive(false);
+            }
+            if (toScreen == "Profiel")
+            {
+                homeScreen.SetActive(false);
+                profielScreen.SetActive(true);
+            }
         }
-      if(toScreen == "Profiel")
+
+        public void LoadScene(string sceneName)
         {
-            homeScreen.SetActive(false);
-            profielScreen.SetActive(true);
+            SceneManager.LoadScene(sceneName);
         }
-    }
 
-    public void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

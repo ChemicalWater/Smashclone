@@ -2,34 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerInventory : MonoBehaviour
+namespace smashclone
 {
-    public ArrayList Items;
-    [Tooltip("How many items can a player carry?")]
-    [SerializeField] private int inventoryCapacity = 1;
-
-    void Start()
+    public class playerInventory : MonoBehaviour
     {
-        Items = new ArrayList();
-    }
+        public ArrayList Items;
+        [Tooltip("How many items can a player carry?")]
+        [SerializeField]
+        private int inventoryCapacity = 1;
 
-    public void attachItem (string itemName)
-    {
-        if (Items.Count < inventoryCapacity)
-        Items.Add(itemName);
-    }
+        void Start()
+        {
+            Items = new ArrayList();
+        }
 
-    public float useItem(string itemName)
-    {
-        switch (itemName) {
-            case "Item_Health":
-               // this.GetComponent<playerControl>().addHealth(0.2f);
-                Items.Remove(itemName);
-                return 0.2f;
+        public void attachItem(string itemName)
+        {
+            if (Items.Count < inventoryCapacity)
+                Items.Add(itemName);
+        }
 
-            default:
-                Debug.Log("Couldn't find item with name: " + itemName);
-                return 0f;
-                }
+        public float useItem(string itemName)
+        {
+            switch (itemName)
+            {
+                case "Item_Health":
+                    // this.GetComponent<playerControl>().addHealth(0.2f);
+                    Items.Remove(itemName);
+                    return 0.2f;
+
+                default:
+                    Debug.Log("Couldn't find item with name: " + itemName);
+                    return 0f;
+            }
+        }
     }
 }

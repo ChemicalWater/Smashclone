@@ -3,27 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class movePlatforms : MonoBehaviourPun
+namespace smashclone
 {
-    private SpriteRenderer platformSprite;
-    [SerializeField] private float moveSpeed = 0.006f;
-
-    void Start()
+    public class movePlatforms : MonoBehaviourPun
     {
-        platformSprite = GetComponent<SpriteRenderer>();
-        transform.SetParent(GameObject.FindGameObjectWithTag("platforms").transform);
-    }
+        private SpriteRenderer platformSprite;
+        [SerializeField]
+        private float moveSpeed = 0.008f;
+        private float storeSpeed;
 
-    void FixedUpdate()
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y - moveSpeed);
-        if (transform.position.y < -2f && PhotonNetwork.IsMasterClient)
-            photonView.RPC("newPosition", RpcTarget.All, gameObject.GetComponentInParent<spawnPlatforms>().setRandom() );
-    }
+        void Start()
+        {
+            platformSprite = GetComponent<SpriteRenderer>();
+            transform.SetParent(GameObject.FindGameObjectWithTag("platforms").transform);
+            storeSpeed = moveSpeed;
+        }
 
-    [PunRPC]
-    public void newPosition(Vector3 randomPos)
-    {
-        transform.position = randomPos;
+        void FixedUpdate()
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - moveSpeed);
+            if (transform.position.y < -2f && PhotonNetwork.IsMasterClient)
+                photonView.RPC("NewPosition", RpcTarget.All, gameObject.GetComponentInParent<spawnPlatforms>().setRandom());
+        }
+
+
+        public void ChangeSpeed(float newSpeed)
+        {
+            moveSpeed = newSpeed;
+        }
+
+        [PunRPC]
+        public void NewPosition(Vector3 randomPos)
+        {
+            transform.position = randomPos;
+        }
     }
 }

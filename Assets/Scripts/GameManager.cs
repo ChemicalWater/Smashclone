@@ -26,6 +26,8 @@ namespace smashclone
         private GameObject itemSpawnClone;
         [Tooltip("The prefab to use for spawning platforms")]
         public GameObject platformSpawner;
+        [Tooltip("The platform players spawn upon")]
+        [SerializeField] public GameObject playerPlatform;
 
         [SerializeField] private bool ItemSpawning;
 
@@ -42,12 +44,13 @@ namespace smashclone
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
-                    if (ItemSpawning)
+                    if (PhotonNetwork.IsMasterClient)
                     {
-                        spawnItems();
+                        if (ItemSpawning)
+                        {
+                            spawnItems();
+                        }
                     }
-                   
-                    spawnPlatforms();
                 }
                 else
                 {
@@ -73,11 +76,6 @@ namespace smashclone
         {
                 itemSpawnClone = PhotonNetwork.Instantiate(this.itemSpawner.name, new Vector3(-0.1138714f, -0.7103133f, 0f), Quaternion.identity, 0);
                 ItemSpawning = false;
-        }
-
-        public void spawnPlatforms()
-        {
-            platformSpawner = PhotonNetwork.Instantiate(this.platformSpawner.name, new Vector3(0, 0, 0f), Quaternion.identity, 0);
         }
 
         #endregion
